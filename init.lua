@@ -415,7 +415,6 @@ local on_attach = function(_, bufnr)
 end
 
 local signs = {
-
   { name = 'DiagnosticSignError', text = '' },
   { name = 'DiagnosticSignWarn', text = '' },
   { name = 'DiagnosticSignHint', text = '' },
@@ -444,6 +443,13 @@ vim.diagnostic.config {
   },
 }
 
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = 'rounded',
+})
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = 'rounded',
+})
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
