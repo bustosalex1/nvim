@@ -12,6 +12,7 @@ return {
         diagnostics.ruff,
         formatting.bibclean,
         formatting.black,
+        formatting.gofumpt,
         formatting.isort,
         formatting.latexindent,
         formatting.nixfmt,
