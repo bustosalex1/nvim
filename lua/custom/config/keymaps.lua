@@ -9,11 +9,11 @@ vim.keymap.set('n', '<S-h>', ':bprevious<CR>', { noremap = true, silent = true }
 local _general_settings = vim.api.nvim_create_augroup('_general_settings', { clear = true })
 
 vim.api.nvim_create_autocmd('FileType', {
-	pattern = { 'qf', 'help', 'man', 'lspinfo', 'TelescopePrompt', 'toggleterm' },
-	group = _general_settings,
-	callback = function()
-		vim.schedule(function()
-			vim.api.nvim_buf_set_keymap(0, 'n', 'q', ':close!<CR>', { noremap = true, silent = true })
-		end)
-	end,
+  pattern = { 'qf', 'help', 'man', 'lspinfo', 'TelescopePrompt', 'toggleterm' },
+  group = _general_settings,
+  callback = function()
+    vim.schedule(function()
+      vim.api.nvim_buf_set_keymap(0, 'n', 'q', ':close!<CR>', { noremap = true, silent = true })
+    end)
+  end,
 })
