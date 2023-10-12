@@ -461,7 +461,15 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 local servers = {
   -- clangd = {},
   -- gopls = {},
-  pyright = {},
+  pyright = {
+    settings = {
+      python = {
+        analysis = {
+          diagnosticMode = 'openFilesOnly',
+        },
+      },
+    },
+  },
   rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
