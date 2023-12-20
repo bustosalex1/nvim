@@ -1,0 +1,54 @@
+{
+  "preamble": {
+    "prefix": "preamble",
+    "body": [
+      "\\documentclass[11pt]{article}",
+      "% Math-y Homework Template, based on",
+      "% https://www.overleaf.com/latex/templates/simple-math-homework-template/tbszsswsndrz",
+      "\\usepackage[utf8]{inputenc}",
+      "\\usepackage[english]{babel}",
+      "\\usepackage[margin=1in]{geometry}",
+      "\\pdfminorversion=7",
+      "% Don't indent paragraphs, leave some space between them",
+      "\\usepackage{parskip}",
+      "% Hide page number when page is empty",
+      "\\usepackage{emptypage}",
+      "\\usepackage{subcaption}",
+      "\\usepackage{multicol}",
+      "\\usepackage{xcolor}",
+      "% Math stuff",
+      "\\usepackage{amsmath, amsfonts, mathtools, amsthm, amssymb}",
+      "% Fancy script capitals",
+      "\\usepackage{mathrsfs}",
+      "\\usepackage{cancel}",
+      "% Bold math",
+      "\\usepackage{bm}",
+      "%Tables",
+      "\\usepackage{booktabs}",
+      "%This information doesn't actually show up on your document unless you use the maketitle inside document",
+      "\\author{Alexander Bustos}",
+      "\\date\\today",
+      "\\title{{$1:Title}}",
+      "\\begin{document}",
+      "\\maketitle",
+      "\\section{${2:Section1}}",
+      "\\end{document}"
+    ],
+    "description": "Basic preamble."
+  },
+  "bm": {
+    "prefix": "bm",
+    "body": "\\bm{$1}",
+    "description": "Bold math."
+  },
+  "gather": {
+    "prefix": "gather",
+    "body": ["\\begin{gather*}", "$1", "\\end{gather*}"],
+    "description": "Sets up an unnumbered gather environment."
+  },
+  "align": {
+    "prefix": "align",
+    "body": ["\\begin{align*}", "$1", "\\end{align*}"],
+    "description": "Sets up an unnumbered align environment."
+  }
+}
