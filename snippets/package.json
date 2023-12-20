@@ -5,6 +5,7 @@
       {
         "language": [
           "tex",
+          "plaintex",
           "markdown"
         ],
         "path": "./snippets/latex.json"
