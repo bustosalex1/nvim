@@ -57,7 +57,16 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        tag = 'legacy',
+        opts = {
+          window = {
+            blend = 0,
+            relative = 'editor',
+          },
+        },
+      },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -120,14 +129,27 @@ require('lazy').setup({
       end,
     },
   },
+  {
+    'catppuccin/nvim',
+    name = 'catppuccin',
+    priority = 1000,
+  },
 
   {
     -- goated colorscheme
     'folke/tokyonight.nvim',
     priority = 1000,
-    opts = {},
-    config = function()
-      vim.cmd.colorscheme 'tokyonight-moon'
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = 'transparent',
+        floats = 'transparent',
+      },
+    },
+    config = function(_, opts)
+      local tokyonight = require 'tokyonight'
+      tokyonight.setup(opts)
+      tokyonight.load()
     end,
   },
 
@@ -143,8 +165,8 @@ require('lazy').setup({
       ibl.setup {
         indent = { char = '▏' },
         scope = {
-          show_start = false,
-          show_end = false,
+          show_start = true,
+          show_end = true,
         },
       }
     end,
@@ -154,6 +176,10 @@ require('lazy').setup({
   { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
+  {
+    'nvim-telescope/telescope-file-browser.nvim',
+    dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+  },
   {
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
@@ -186,7 +212,6 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -299,8 +324,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
-    'org' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'org' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -463,11 +487,10 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   pyright = {
-    settings = {
-      python = {
-        analysis = {
-          diagnosticMode = 'openFilesOnly',
-        },
+    python = {
+      analysis = {
+        typeCheckingMode = 'off',
+        diagnosticMode = 'openFilesOnly',
       },
     },
   },
@@ -508,6 +531,9 @@ mason_lspconfig.setup_handlers {
   end,
 }
 
+-- setup swift
+local lspconfig = require 'lspconfig'
+lspconfig.sourcekit.setup {}
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
 local cmp = require 'cmp'
@@ -521,6 +547,7 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+
   mapping = cmp.mapping.preset.insert {
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),

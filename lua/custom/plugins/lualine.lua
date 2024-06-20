@@ -43,7 +43,7 @@ return {
   opts = {
     options = {
       icons_enabled = true,
-      theme = 'auto',
+      theme = 'tokyonight',
       component_separators = { left = '', right = '' },
       section_separators = { left = '', right = '' },
       disabled_filetypes = { 'alpha', 'dashboard', 'NvimTree', 'Outline' },
@@ -67,7 +67,7 @@ return {
         },
       },
       lualine_b = { mode },
-      lualine_c = {},
+      lualine_c = { 'buffers' },
       lualine_x = { diff, spaces, 'encoding', filetype },
       lualine_y = { location },
       lualine_z = { progress },
